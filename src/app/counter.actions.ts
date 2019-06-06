@@ -4,6 +4,7 @@ export enum ActionTypes {
     Increment = '[Counter Component] Increment',
     Decrement = '[Counter Component] Decrement',
     Reset = '[Counter Component] Reset',
+    Initialise = '[Counter Component] Initialise'
 }
 
 export class Increment implements Action {
@@ -16,4 +17,10 @@ export class Decrement implements Action {
 
 export class Reset implements Action {
     readonly type = ActionTypes.Reset;
+}
+
+export class Initialise implements Action {
+    readonly type = ActionTypes.Initialise;
+    constructor(public payload: number) {
+    }
 }

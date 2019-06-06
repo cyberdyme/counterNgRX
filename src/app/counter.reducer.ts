@@ -1,18 +1,36 @@
 import { Action } from '@ngrx/store';
-import { ActionTypes } from './counter.actions';
+import { ActionTypes, Initialise } from './counter.actions';
 
-export const initialState = 0;
 
-export function counterReducer(state = initialState, action: Action) {
+export interface AppState {
+    count: number;
+}
+
+export const initialState: AppState = {
+    count: 0
+};
+
+export function counterReducer(state: AppState = initialState, action: Action) {
     switch (action.type) {
         case ActionTypes.Increment:
-            return state + 1;
+            return {
+                count: state.count + 1
+            };
 
         case ActionTypes.Decrement:
-            return state - 1;
+            return {
+                count: state.count - 1
+            };
 
         case ActionTypes.Reset:
-            return 0;
+            return {
+                count: 0
+            };
+
+        case ActionTypes.Initialise:
+                return {
+                    count: (action as Initialise).payload
+                };
 
         default:
             return state;

@@ -1,6 +1,13 @@
 <button (click)="increment()">Increment</button>
  
+<!--
 <div>Current Count: {{ count$ | async }}</div>
+-->
+
+<div>Current Count: {{(count$ | async | json)}}</div>
+<div *ngIf="( count$ | async ) as value">
+    {{ value.count }}
+</div>
 
 <button (click)="decrement()">Decrement</button>
 

@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './counter.reducer';
 import { CounterComponent } from './counter.component';
+import * as fromCounterReducer from './counter.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CounterEffects } from './counter.effects';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { CounterComponent } from './counter.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ count: counterReducer })
+    EffectsModule.forRoot([ CounterEffects ]),
+    StoreModule.forRoot({ counter: fromCounterReducer.counterReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
