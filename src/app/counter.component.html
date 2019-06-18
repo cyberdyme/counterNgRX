@@ -7,8 +7,10 @@
 <div>Current Count: {{(count$ | async | json)}}</div>
 <div *ngIf="( count$ | async ) as value">
     {{ value.count }}
+
+    <button (click)="decrement()">Decrement</button>
+    <button (click)="reset()">Reset Counter</button>
+
+    <mat-spinner></mat-spinner>
 </div>
 
-<button (click)="decrement()">Decrement</button>
-
-<button (click)="reset()">Reset Counter</button>

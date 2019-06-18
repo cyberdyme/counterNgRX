@@ -8,6 +8,8 @@ import { CounterComponent } from './counter.component';
 import * as fromCounterReducer from './counter.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CounterEffects } from './counter.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CounterEffects } from './counter.effects';
     BrowserModule,
     AppRoutingModule,
     EffectsModule.forRoot([ CounterEffects ]),
-    StoreModule.forRoot({ counter: fromCounterReducer.counterReducer })
+    StoreModule.forRoot({ counter: fromCounterReducer.counterReducer }),
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
