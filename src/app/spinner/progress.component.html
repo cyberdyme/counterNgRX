@@ -1,0 +1,8 @@
+<div>SPINNER HERE</div>
+<div>Current Count: {{(loading$ | async | json)}}</div>
+
+<div *ngIf="( loading$ | async ) as value">
+  <div *ngIf="value.loading">
+      <mat-spinner></mat-spinner>
+  </div>
+</div>

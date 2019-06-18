@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { CounterComponent } from './counter.component';
-import * as fromCounterReducer from './counter.reducer';
+import { CounterComponent } from './counter/counter.component';
+import * as fromCounterReducer from './counter/counter.reducer';
+import * as fromProgressReducer from './spinner/progress.reducer';
+
 import { EffectsModule } from '@ngrx/effects';
-import { CounterEffects } from './counter.effects';
+import { CounterEffects } from './counter/counter.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SpinnerModule } from './spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     BrowserModule,
     AppRoutingModule,
     EffectsModule.forRoot([ CounterEffects ]),
-    StoreModule.forRoot({ counter: fromCounterReducer.counterReducer }),
+    StoreModule.forRoot({
+      counter: fromCounterReducer.counterReducer,
+      progress: fromProgressReducer.progressReducer
+    }),
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    SpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
