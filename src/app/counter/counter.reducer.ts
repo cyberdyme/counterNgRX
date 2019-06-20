@@ -1,10 +1,14 @@
-import { Action } from '@ngrx/store';
+import { Action, createFeatureSelector, createSelector } from '@ngrx/store';
 import { ActionTypes, Initialise } from './counter.actions';
-import { AppState } from '../reducers';
+import * as fromRoot from '../reducers';
 
-
-export interface CounterState extends AppState {
+export interface CounterState {
     count: number;
+}
+
+
+export interface State extends fromRoot.State {
+    counter: CounterState;
 }
 
 export const initialState: CounterState = {
@@ -37,3 +41,16 @@ export function counterReducer(state: CounterState = initialState, action: Actio
             return state;
     }
 }
+
+export const getCountersState = createFeatureSelector<State, CounterState>('counter');
+
+
+export const getCounterState = createSelector(
+    getCountersState,
+    state => state
+  );
+
+export const getCounterCount = createSelector(
+    getCounterState,
+    state => state.count
+  );
