@@ -1,16 +1,17 @@
 import { Action } from '@ngrx/store';
 import { ActionTypes, Initialise } from './counter.actions';
+import { AppState } from '../reducers';
 
 
-export interface AppState {
+export interface CounterState extends AppState {
     count: number;
 }
 
-export const initialState: AppState = {
+export const initialState: CounterState = {
     count: 0
 };
 
-export function counterReducer(state: AppState = initialState, action: Action) {
+export function counterReducer(state: CounterState = initialState, action: Action) {
     switch (action.type) {
         case ActionTypes.Increment:
             return {

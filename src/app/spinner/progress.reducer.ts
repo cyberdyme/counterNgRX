@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
 import { ActionTypes } from './progress.actions';
+import { AppState } from '../reducers';
 
-export interface ProgressState {
+export interface ProgressState extends AppState {
     loading: boolean;
 }
 
