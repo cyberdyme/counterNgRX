@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { tap, switchMap, mergeMap, map, catchError } from 'rxjs/operators';
+import { tap, mergeMap, map } from 'rxjs/operators';
 
-import { ActionTypes, Initialise } from './counter.actions';
+import * as fromCounterActions from './counter.actions';
+import * as fromSpinner from './../spinner/progress.actions';
+
 
 @Injectable()
 export class CounterEffects {
@@ -14,19 +16,31 @@ export class CounterEffects {
 
     @Effect({dispatch: false})
     loadAllArticles$: Observable<Action> = this.actions$.pipe(
-        ofType(ActionTypes.Initialise),
+        ofType(fromCounterActions.Initialise),
         tap(x => {
             console.log('My Effects ' + x.type);
         })
     );
 
     @Effect()
+    incrementArticles$: Observable<Action> = this.actions$.pipe(
+        ofType(fromCounterActions.Increment),
+        map(() => fromSpinner.Loading())
+    );
+
+    @Effect()
+    decrementArticles$: Observable<Action> = this.actions$.pipe(
+        ofType(fromCounterActions.Decrement),
+        map(() => fromSpinner.Loading())
+    );
+
+    @Effect()
     loadMovies$ = this.actions$
     .pipe(
-      ofType(ActionTypes.Reset),
+      ofType(fromCounterActions.Reset),
       mergeMap(() => this.getAllItems()
         .pipe(
-          map(value => new Initialise(value))
+          map(value => fromCounterActions.Initialise({id: value}))
         ))
     );
 

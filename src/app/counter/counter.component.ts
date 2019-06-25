@@ -3,8 +3,6 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Increment, Decrement, Reset, Initialise } from './counter.actions';
 import * as fromCounter from './counter.reducer';
-import * as fromRoot from './counter.reducer';
-
 
 @Component({
     selector: 'app-counter',
@@ -19,18 +17,18 @@ export class CounterComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.store.dispatch(new Initialise(55));
+        this.store.dispatch(Initialise({id: 55}));
     }
 
     increment() {
-        this.store.dispatch(new Increment());
+        this.store.dispatch(Increment());
     }
 
     decrement() {
-        this.store.dispatch(new Decrement());
+        this.store.dispatch(Decrement());
     }
 
     reset() {
-        this.store.dispatch(new Reset());
+        this.store.dispatch(Reset());
     }
 }

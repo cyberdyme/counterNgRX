@@ -18,6 +18,6 @@ export class ProgressComponent implements OnInit {
 
   ngOnInit() {
     // this.store.dispatch(new Initialise(55));
-    this.store.dispatch(new Loading());
+    this.store.dispatch(Loading());
   }
 }

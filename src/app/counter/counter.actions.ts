@@ -1,5 +1,23 @@
-import { Action } from '@ngrx/store';
+import {createAction, props } from '@ngrx/store';
 
+export const Increment = createAction (
+    '[Counter Component] Increment',
+);
+
+export const Decrement = createAction (
+    '[Counter Component] Decrement'
+);
+
+export const Reset = createAction (
+    '[Counter Component] Reset'
+);
+
+export const Initialise = createAction (
+    '[Counter Component] Initialise',
+    props<{ id: number }>()
+);
+
+/*
 export enum ActionTypes {
     Increment = '[Counter Component] Increment',
     Decrement = '[Counter Component] Decrement',
@@ -24,3 +42,4 @@ export class Initialise implements Action {
     constructor(public payload: number) {
     }
 }
+*/

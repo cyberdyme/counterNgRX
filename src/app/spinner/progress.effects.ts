@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { tap, switchMap, mergeMap, map, delay, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { mergeMap, map, delay } from 'rxjs/operators';
 
-import { ActionTypes, Loaded } from './progress.actions';
+import { Loaded, Loading } from './progress.actions';
 
 
 @Injectable()
@@ -15,11 +14,11 @@ export class ProgressEffects {
     @Effect()
     startProgress$ = this.actions$
     .pipe(
-      ofType(ActionTypes.Loading),
+      ofType(Loading),
       mergeMap(() => this.getAllItems()
         .pipe(
-          delay(3000),
-          map(value => new Loaded())
+          delay(500),
+          map(() => Loaded())
         ))
     );
 
