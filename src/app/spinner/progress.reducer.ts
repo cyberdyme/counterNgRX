@@ -12,25 +12,6 @@ export const initialState: ProgressState = {
 
 export const progressReducer = createReducer(
     initialState,
-    on(fromProgessActions.Loading, (state) => ({ loading: true})),
-    on(fromProgessActions.Loaded, (state) => ({ loading: false})),
+    on(fromProgessActions.Loading, (state) => ({ loading: true })),
+    on(fromProgessActions.Loaded, (state) => ({ loading: false })),
 );
-
-/*
-export function progressReducer(state: ProgressState = initialState, action: Action) {
-    switch (action) {
-        case Loading:
-            return {
-                loading: true
-            };
-
-        case Loaded:
-            return {
-                loading: false
-            };
-
-        default:
-            return state;
-    }
-}
-*/

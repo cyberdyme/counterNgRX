@@ -8,9 +8,11 @@
 <div *ngIf="( count$ | async ) as value">
     {{ value.count }}
 
-    <button (click)="decrement()">Decrement</button>
-    <button (click)="reset()">Reset Counter</button>
-
+    <div>
+        <button (click)="decrement()">Decrement</button>
+        <button (click)="reset()">Reset Counter</button>
+        <button (click)="resetToOne()">Reset To One</button>
+    </div>
     <app-progress></app-progress>
     <!--
     <mat-spinner></mat-spinner>

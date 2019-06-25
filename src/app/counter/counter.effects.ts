@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { tap, mergeMap, map } from 'rxjs/operators';
+import { tap, mergeMap, map, switchMap } from 'rxjs/operators';
 
 import * as fromCounterActions from './counter.actions';
 import * as fromSpinner from './../spinner/progress.actions';
@@ -13,9 +13,8 @@ export class CounterEffects {
 
     constructor(private actions$: Actions) { }
 
-
     @Effect({dispatch: false})
-    loadAllArticles$: Observable<Action> = this.actions$.pipe(
+    initialiseCounter$: Observable<Action> = this.actions$.pipe(
         ofType(fromCounterActions.Initialise),
         tap(x => {
             console.log('My Effects ' + x.type);
@@ -23,25 +22,33 @@ export class CounterEffects {
     );
 
     @Effect()
-    incrementArticles$: Observable<Action> = this.actions$.pipe(
+    incrementCounter$: Observable<Action> = this.actions$.pipe(
         ofType(fromCounterActions.Increment),
         map(() => fromSpinner.Loading())
     );
 
     @Effect()
-    decrementArticles$: Observable<Action> = this.actions$.pipe(
+    decrementCounter$: Observable<Action> = this.actions$.pipe(
         ofType(fromCounterActions.Decrement),
         map(() => fromSpinner.Loading())
     );
 
     @Effect()
-    loadMovies$ = this.actions$
+    resetCounter$ = this.actions$
     .pipe(
       ofType(fromCounterActions.Reset),
       mergeMap(() => this.getAllItems()
         .pipe(
-          map(value => fromCounterActions.Initialise({id: value}))
+          switchMap(value => [
+              fromSpinner.Loading(),
+              fromCounterActions.Initialise({id: value})])
         ))
+    );
+
+    @Effect()
+    resetToZeroCounter$: Observable<Action> = this.actions$.pipe(
+        ofType(fromCounterActions.ResetToOne),
+        map(() => fromSpinner.Loading())
     );
 
     getAllItems() {

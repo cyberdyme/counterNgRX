@@ -6,7 +6,6 @@ export interface CounterState {
     count: number;
 }
 
-
 export interface State extends fromRoot.State {
     counter: CounterState;
 }
@@ -29,6 +28,10 @@ export const counterReducer = createReducer(
     on(fromCounterActions.Reset, (state) => ({
         ...state,
         count: 0,
+      })),
+    on(fromCounterActions.ResetToOne, (state) => ({
+        ...state,
+        count: 1,
       })),
     on(fromCounterActions.Initialise, (state, {id}) => ({
         ...state,
