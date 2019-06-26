@@ -12,7 +12,7 @@ export const Reset = createAction (
     '[Counter Component] Reset'
 );
 
-export const ResetToOne = createAction (
+export const ResetToZero = createAction (
     '[Counter Component] Reset To Zero'
 );
 

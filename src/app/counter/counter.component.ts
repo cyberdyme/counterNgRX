@@ -33,6 +33,6 @@ export class CounterComponent implements OnInit {
     }
 
     resetToOne() {
-        this.store.dispatch(fromCounterActions.ResetToOne());
+        this.store.dispatch(fromCounterActions.ResetToZero());
     }
 }

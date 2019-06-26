@@ -2,7 +2,8 @@
 <div>Current Count: {{(loading$ | async | json)}}</div>
 
 <div *ngIf="( loading$ | async ) as value">
+  {{value.value}} {{value.loading}}
   <div *ngIf="value.loading">
-      <mat-spinner></mat-spinner>
+      <mat-spinner [value]="value.value" mode="determinate"></mat-spinner>
   </div>
 </div>

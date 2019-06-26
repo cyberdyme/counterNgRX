@@ -13,7 +13,7 @@ export class CounterEffects {
 
     constructor(private actions$: Actions) { }
 
-    @Effect({dispatch: false})
+    @Effect({ dispatch: false })
     initialiseCounter$: Observable<Action> = this.actions$.pipe(
         ofType(fromCounterActions.Initialise),
         tap(x => {
@@ -35,23 +35,26 @@ export class CounterEffects {
 
     @Effect()
     resetCounter$ = this.actions$
-    .pipe(
-      ofType(fromCounterActions.Reset),
-      mergeMap(() => this.getAllItems()
         .pipe(
-          switchMap(value => [
-              fromSpinner.Loading(),
-              fromCounterActions.Initialise({id: value})])
-        ))
-    );
+            ofType(fromCounterActions.Reset),
+            mergeMap(() => this.getAllItems()
+                .pipe(
+                    switchMap(value => [
+                        fromSpinner.Loading(),
+                        fromCounterActions.Initialise({ id: value })])
+                ))
+        );
 
     @Effect()
     resetToZeroCounter$: Observable<Action> = this.actions$.pipe(
-        ofType(fromCounterActions.ResetToOne),
+        ofType(fromCounterActions.ResetToZero),
         map(() => fromSpinner.Loading())
     );
 
     getAllItems() {
-        return of(12345);
+        const min = -128;
+        const max = 128;
+        const random =  Math.trunc(Math.random() * (+max - +min) + +min);
+        return of(random);
     }
 }

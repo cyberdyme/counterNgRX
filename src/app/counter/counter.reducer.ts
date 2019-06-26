@@ -29,9 +29,9 @@ export const counterReducer = createReducer(
         ...state,
         count: 0,
       })),
-    on(fromCounterActions.ResetToOne, (state) => ({
+    on(fromCounterActions.ResetToZero, (state) => ({
         ...state,
-        count: 1,
+        count: 0,
       })),
     on(fromCounterActions.Initialise, (state, {id}) => ({
         ...state,
